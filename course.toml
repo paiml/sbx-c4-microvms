@@ -1,0 +1,12 @@
+[course]
+slug = "sbx-c4-microvms"
+number = 4
+title = "MicroVMs"
+tagline = "Firecracker configurations that stay confined, tested to 100%."
+description = "Tested Rust code for the fourth course of the Sandboxing specialization: a Firecracker configuration builder with confinement checks, run for real against KVM."
+prerequisites = ["A Linux host with /dev/kvm access", "Rust 1.80 or newer"]
+
+[[examples]]
+dir = "src"
+title = "microvmctl CLI"
+summary = "config, validate and args, plus a contract line"

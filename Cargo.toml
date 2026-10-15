@@ -1,0 +1,14 @@
+[package]
+name = "microvmctl"
+version = "0.1.0"
+edition = "2021"
+description = "Course code for MicroVMs: Firecracker configuration builder, validation and boot-argument policy"
+license = "MIT"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "microvmctl"
+path = "src/main.rs"

@@ -1,0 +1,36 @@
+metadata:
+  version: "1.0.0"
+  author: "paiml"
+  description: "microvmctl demo contracts: the default microVM configuration is confined and every widening is refused"
+  kind: pattern
+  crate: "microvmctl"
+  references:
+    - "firecracker-microvm.github.io docs; man7.org kvm(4)"
+
+equations:
+  default_config_is_confined:
+    formula: "validate(c) = Ok implies c.rootfs_read_only and c.tap is none"
+    domain: "c ∈ Config"
+    invariants:
+      - "a writable root file system is refused"
+      - "a network interface is refused by default"
+
+proof_obligations:
+  - type: invariant
+    property: "An accepted configuration never has a writable root or a network device"
+    formal: "validate(c) = Ok => rootfs_read_only and tap is none"
+    applies_to: all
+
+falsification_tests:
+  - id: FALSIFY-MVM-001
+    rule: "default configuration is confined"
+    test: "binary_runs_end_to_end"
+    prediction: "prints contract: microvm-default-config-is-confined OK"
+    if_fails: "Contract violation — a widened configuration was accepted"
+
+qa_gate:
+  id: QA-MVM
+  name: "microvmctl contracts"
+  min_coverage: 1.0
+  max_complexity: 10
+  required_tests: ["binary_runs_end_to_end"]
